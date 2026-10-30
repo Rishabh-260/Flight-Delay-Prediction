@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres:16
+    container_name: flight-delay-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-flight_delay}
+      POSTGRES_USER: ${POSTGRES_USER:-flight_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-flight_local_password}
+    ports:
+      - "5432:5432"
+    volumes:
+      - flight_delay_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-flight_user} -d ${POSTGRES_DB:-flight_delay}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+volumes:
+  flight_delay_pgdata:

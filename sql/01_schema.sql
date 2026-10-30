@@ -1,0 +1,36 @@
+CREATE TABLE IF NOT EXISTS raw_bts_flights (
+    flight_date DATE NOT NULL,
+    reporting_airline TEXT,
+    flight_number INTEGER,
+    origin TEXT,
+    origin_city TEXT,
+    origin_state TEXT,
+    dest TEXT,
+    dest_city TEXT,
+    dest_state TEXT,
+    crs_dep_time INTEGER,
+    crs_arr_time INTEGER,
+    crs_elapsed_time DOUBLE PRECISION,
+    distance DOUBLE PRECISION,
+    dep_time INTEGER,
+    dep_delay DOUBLE PRECISION,
+    taxi_out DOUBLE PRECISION,
+    wheels_off INTEGER,
+    wheels_on INTEGER,
+    taxi_in DOUBLE PRECISION,
+    arr_time INTEGER,
+    arr_delay DOUBLE PRECISION,
+    cancelled DOUBLE PRECISION,
+    cancellation_code TEXT,
+    diverted DOUBLE PRECISION,
+    actual_elapsed_time DOUBLE PRECISION,
+    air_time DOUBLE PRECISION,
+    carrier_delay DOUBLE PRECISION,
+    weather_delay DOUBLE PRECISION,
+    nas_delay DOUBLE PRECISION,
+    security_delay DOUBLE PRECISION,
+    late_aircraft_delay DOUBLE PRECISION
+);
+
+CREATE INDEX IF NOT EXISTS idx_raw_bts_flights_date ON raw_bts_flights (flight_date);
+CREATE INDEX IF NOT EXISTS idx_raw_bts_flights_origin_date ON raw_bts_flights (origin, flight_date);
